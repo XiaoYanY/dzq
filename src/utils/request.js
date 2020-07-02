@@ -43,7 +43,7 @@ const get = (url, params = {}) => {
         params
       })
       .then(response => {
-        if (response && response.data) {
+        if (response?.data) {
           resolve(response.data);
         } else {
           resolve({ data: [] });
@@ -61,7 +61,6 @@ const get = (url, params = {}) => {
  * @param data
  * @returns {Promise}
  */
-
 const post = (url, data = {}) => {
   return new Promise((resolve, reject) => {
     axios.post(url, data).then(
@@ -75,7 +74,55 @@ const post = (url, data = {}) => {
   });
 };
 
+/**
+ * put
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+const put = (url, data = {}) => {
+  return new Promise((resolve, reject) => {
+    axios.put(url, data).then(
+      response => {
+        if (response?.data) {
+          resolve(response.data);
+        } else {
+          reject(response.error);
+        }
+      },
+      err => {
+        reject(err);
+      }
+    );
+  });
+};
+
+/**
+ * put
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+const del = (url, data = {}) => {
+  return new Promise((resolve, reject) => {
+    axios.delete(url, data).then(
+      response => {
+        if (response?.data) {
+          resolve(response.data);
+        } else {
+          reject(response.error);
+        }
+      },
+      err => {
+        reject(err);
+      }
+    );
+  });
+};
+
 export default {
   get,
-  post
+  post,
+  put,
+  del
 };

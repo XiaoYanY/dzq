@@ -21,7 +21,7 @@ const Home = res => {
       </Head>
 
       <div className="hero">
-        <h1 className="title">Welcome to b page!</h1>
+        <h1 className="title">Welcome to b page!bbb</h1>
 
         <div className={styles.stark}>This is blog page</div>
 

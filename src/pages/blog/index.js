@@ -1,9 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
-import Nav from '../../components/nav';
+import { connect } from 'react-redux';
+import Nav from '../../components/Nav';
 import styles from './styles.styl';
 
-const Home = () => (
+const Home = props => (
   <div>
     <Head>
       <title>Home</title>
@@ -11,7 +12,7 @@ const Home = () => (
     </Head>
 
     <div className="hero">
-      <h1 className="title">Welcome to blog page!</h1>
+      <h1 className="title">Welcome to blog page! {props.demoName}</h1>
 
       <div className={styles.stark}>This is blog page</div>
 
@@ -69,4 +70,7 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+export default connect(
+  ({ home }) => ({ ...home }),
+  ({ home }) => ({ ...home })
+)(Home);

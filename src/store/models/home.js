@@ -1,8 +1,11 @@
-import request from '../../utils/request';
+import services from '../loadServices';
+
+const { commonService } = services;
 
 export default {
   state: {
-    user: {}
+    user: {},
+    demoName: 'hello word'
   },
   reducers: {
     updateState(state, payload) {
@@ -14,7 +17,7 @@ export default {
   },
   effects: {
     async getUser(payload, state) {
-      const res = await request.get('');
+      const res = await commonService.getHomeData();
       this.updateState({ user: res.data });
     }
   }
