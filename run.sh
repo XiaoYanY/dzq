@@ -14,7 +14,4 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=2c46efde8e65e0c16baf32aa
              "content": "'${APP_NAME}:${APP_ENV}'项目启动成功，时间:${ELAPSED_TIME}s"
         }
       }'
-if [ -f $HOME/config-$APP_ENV.json ]; then
-  ENABLE_NODE_LOG=YES agenthub $HOME/config-$APP_ENV.json &
-fi
 exec "$@"
