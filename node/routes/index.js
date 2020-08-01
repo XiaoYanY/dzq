@@ -9,6 +9,11 @@ const utils = require('../utils');
 module.exports = function(app) {
   const handle = app.getRequestHandler();
   console.log('starkwang chinese name', utils.stark);
+
+  router.get('/check', async ctx => {
+    await app.render(ctx.req, ctx.res, '/check', ctx.query);
+  });
+
   Object.keys(proxyTable).forEach(context => {
     let options = proxyTable[context];
     if (typeof options === 'string') {
