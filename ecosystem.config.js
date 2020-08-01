@@ -1,4 +1,4 @@
-const port = 6000;
+const port = 6020;
 
 module.exports = {
   apps: [
