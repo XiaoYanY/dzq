@@ -11,7 +11,7 @@ curl 'https://oapi.dingtalk.com/robot/send?access_token=2c46efde8e65e0c16baf32aa
    -H 'Content-Type: application/json' \
    -d '{"msgtype": "text", 
         "text": {
-             "content": "'${APP_NAME}:${APP_ENV}'项目启动成功，时间:${ELAPSED_TIME}s"
+             "content": "'${APP_NAME}:${APP_ENV}'项目启动成功，时间:'${ELAPSED_TIME}'s"
         }
       }'
 exec "$@"
