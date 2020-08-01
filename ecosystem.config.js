@@ -41,6 +41,14 @@ module.exports = {
         ENABLE_NODE_LOG: 'YES',
         NODE_LOG_DIR: '/tmp'
       },
+      env_pre: {
+        PORT: port,
+        NODE_ENV: 'local',
+        INIT_ENV: 'local',
+        APP_NAME: 'home',
+        ENABLE_NODE_LOG: 'YES',
+        NODE_LOG_DIR: '/tmp'
+      },
       env_test: {
         PORT: port,
         NODE_ENV: 'dev',

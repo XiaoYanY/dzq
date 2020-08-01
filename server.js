@@ -19,7 +19,7 @@ const router = require('./node/routes')(app);
 const server = new Koa();
 // const handler = routes.getRequestHandler(app);
 // process.exit(1)
-const port = 3200;
+const port = 6020;
 Sentry.init({
   dsn: ''
 });
