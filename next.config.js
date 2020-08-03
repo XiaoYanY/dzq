@@ -51,7 +51,7 @@ module.exports = withPlugins(
       css,
       {
         cssModules: true,
-        transpileModules: ['antd'],
+        transpileModules: ['antd', 'antd-mobile'],
         cssLoaderOptions: {
           localIdentName: '[local]___[hash:base64:5]',
           getLocalIdent: (context, localIdentNames, localName, options) => {
