@@ -12,6 +12,7 @@ module.exports = {
       unitPrecision: 5,
       mediaQuery: false,
       minPixelValue: 0,
+      selectorBlackList: [/^\.nop2r/, /^\.am/], // 排除antd样式
       propList: [
         '*background*',
         '*padding*',
