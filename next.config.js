@@ -1,6 +1,7 @@
 const withPlugins = require('next-compose-plugins');
-const stylus = require('@zeit/next-stylus');
-const css = require('@zeit/next-css');
+const withStylus = require('@zeit/next-stylus');
+const withCss = require('@zeit/next-css');
+const withLess = require('@zeit/next-less');
 const withTM = require('next-transpile-modules');
 const cssLoaderGetLocalIdent = require('css-loader/lib/getLocalIdent.js');
 
@@ -22,53 +23,34 @@ const nextConfig = {
 };
 
 module.exports = withPlugins(
-  [
-    // [
-    //   withTM,
-    //   {
-    //     transpileModules: ['@kkb/daji']
-    //   }
-    // ],
-    [
-      stylus,
-      {
-        cssModules: true,
-        cssLoaderOptions: {
-          importLoaders: 1,
-          localIdentName
-        },
-        postcssLoaderOptions: {
-          // parser: 'sugarss',
-          config: {
-            ctx: {
-              theme: JSON.stringify(process.env.REACT_APP_THEME)
-            }
-          }
+  [withTM, withStylus, withCss, withLess],
+  {
+    cssModules: true,
+    camelCase: true,
+    transpileModules: ['antd', 'antd-mobile'],
+    cssLoaderOptions: {
+      localIdentName: '[local]___[hash:base64:5]',
+      getLocalIdent: (context, localIdentNames, localName, options) => {
+        let hz = context.resourcePath.replace(context.rootContext, '');
+        if (/node_modules/.test(hz)) {
+          return localName;
+        }
+        return cssLoaderGetLocalIdent(
+          context,
+          localIdentNames,
+          localName,
+          options
+        );
+      }
+    },
+    postcssLoaderOptions: {
+      // parser: 'sugarss',
+      config: {
+        ctx: {
+          theme: JSON.stringify(process.env.REACT_APP_THEME)
         }
       }
-    ],
-    [
-      css,
-      {
-        cssModules: true,
-        transpileModules: ['antd', 'antd-mobile'],
-        cssLoaderOptions: {
-          localIdentName: '[local]___[hash:base64:5]',
-          getLocalIdent: (context, localIdentNames, localName, options) => {
-            let hz = context.resourcePath.replace(context.rootContext, '');
-            if (/node_modules/.test(hz)) {
-              return localName;
-            }
-            return cssLoaderGetLocalIdent(
-              context,
-              localIdentNames,
-              localName,
-              options
-            );
-          }
-        }
-      }
-    ]
-  ],
+    }
+  },
   nextConfig
 );

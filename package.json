@@ -23,6 +23,7 @@
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
     "koa2-connect": "^1.0.2",
+    "less": "^3.12.2",
     "next": "^9.4.4",
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^2.3.1",
@@ -47,6 +48,7 @@
     ]
   },
   "devDependencies": {
+    "@zeit/next-less": "^1.0.1",
     "babel-eslint": "^10.0.3",
     "babel-plugin-import": "^1.13.0",
     "eslint": "^6.5.1",
