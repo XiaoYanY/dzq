@@ -5,11 +5,11 @@
       "import",
       {
         "libraryName": "antd",
-        // "libraryDirectory": "es",
-        "style": "css"
+        // "libraryDirectory": "lib",
+        "style": true
       },
       "antd"
     ],
-    ["import", { "libraryName": "antd-mobile", "style": "css" }, "antd-mobile"]
+    ["import", { "libraryName": "antd-mobile", "style": true }, "antd-mobile"]
   ]
 }

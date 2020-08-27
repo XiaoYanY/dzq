@@ -84,7 +84,6 @@ Home.getInitialProps = async ({ store }) => {
 };
 
 const mapState = ({ home }) => {
-  console.log(home);
   return { ...home };
 };
 
@@ -92,7 +91,4 @@ const mapDispatch = dispatch => ({
   getUser: () => dispatch.home.getUser()
 });
 
-export default connect(
-  mapState,
-  mapDispatch
-)(Home);
+export default connect(mapState, mapDispatch)(Home);

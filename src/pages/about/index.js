@@ -78,7 +78,6 @@ About.getInitialProps = async ({ store }) => {
 };
 
 const mapState = ({ demo }) => {
-  console.log(demo);
   return { ...demo };
 };
 
