@@ -16,21 +16,6 @@ if (typeof require !== 'undefined') {
 const nextConfig = {
   distDir: 'dist',
   webpack: (config, { buildId, deve, isServer, defaultLoaders }) => {
-    // if (config.externals) {
-    //   const includes = [/antd|antd-mobile/];
-    //   config.externals = config.externals.map(external => {
-    //     if (typeof external !== 'function') return external;
-    //     return (ctx, req, cb) => {
-    //       return includes.find(include =>
-    //         req.startsWith('.')
-    //           ? include.test(path.resolve(ctx, req))
-    //           : include.test(req)
-    //       )
-    //         ? cb()
-    //         : external(ctx, req, cb);
-    //     };
-    //   });
-    // }
     if (isServer) {
       // 为true使用在服务端, 为false使用在客户端
       const antStyles = /antd\/.*?\/style.*?/;
