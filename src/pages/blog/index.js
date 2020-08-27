@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import TestHome from './test';
 import styles from './styles.styl';
 
 const Home = props => {
@@ -9,7 +10,7 @@ const Home = props => {
         <title>Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
+      <TestHome />
       <div className="hero">
         <h1 className="title">Welcome to blog page! {props.demoName}</h1>
 
