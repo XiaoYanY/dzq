@@ -11,15 +11,8 @@ export const isMobile = () => {
       /(ipod|iphone|android|coolpad|mmp|smartphone|midp|wap|xoom|symbian|j2me|blackberry|wince)/i
     ) != null;
   let is_kkbApp = ua.indexOf('kkbmobile') !== -1;
-  // if (is_mobile) {
-  //   return true
-  // }
-  if (is_mobile && !is_kkbApp) {
-    return 'AnniversaryM';
-  } else if (is_mobile && is_kkbApp) {
-    return 'AnniversaryAPP';
-  } else {
-    return 'AnniversaryP';
+  if (is_mobile) {
+    return true;
   }
 };
 
