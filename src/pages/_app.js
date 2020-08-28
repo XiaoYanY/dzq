@@ -23,6 +23,7 @@ class MyApp extends App {
         dsn: SENTRY_DSN
       });
     } catch (error) {}
+    console.log('process.env', process.env);
   }
 
   componentDidCatch(error, errorInfo) {

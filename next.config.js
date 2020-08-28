@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dev = process.env.NODE_ENV !== 'production';
-
+const { INIT_ENV } = process.env;
 const { plugins } = require('./build/webpack.common');
 
 if (typeof require !== 'undefined') {
@@ -26,65 +26,64 @@ const themeVariables = lessToJS(
 
 const nextConfig = {
   distDir: 'dist',
+  env: {
+    INIT_ENV
+  },
   webpack: (config, { buildId, deve, isServer, defaultLoaders }) => {
-    if (isServer) {
-      const antStyles = /antd\/.*?\/style.*?/;
-      const origExternals = [...config.externals];
-      config.externals = [
-        (context, request, callback) => {
-          if (request.match(antStyles)) return callback();
-          if (typeof origExternals[0] === 'function') {
-            origExternals[0](context, request, callback);
-          } else {
-            callback();
-          }
-        },
-        ...(typeof origExternals[0] === 'function' ? [] : origExternals)
-      ];
-
-      config.module.rules.unshift({
-        test: antStyles,
-        use: 'null-loader'
-      });
-    }
+    // if (isServer) {
+    //   const antStyles = /antd\/.*?\/style.*?/;
+    //   const origExternals = [...config.externals];
+    //   config.externals = [
+    //     (context, request, callback) => {
+    //       if (request.match(antStyles)) return callback();
+    //       if (typeof origExternals[0] === 'function') {
+    //         origExternals[0](context, request, callback);
+    //       } else {
+    //         callback();
+    //       }
+    //     },
+    //     ...(typeof origExternals[0] === 'function' ? [] : origExternals)
+    //   ];
+    //   config.module.rules.unshift({
+    //     test: antStyles,
+    //     use: 'null-loader'
+    //   });
+    // }
     config.plugins.push(...plugins);
     return config;
   }
 };
 
-module.exports = withPlugins(
-  [withStylus, withCss, withLess, withTM],
-  {
-    cssModules: true,
-    camelCase: true,
-    transpileModules: ['antd', 'antd-mobile'],
-    lessLoaderOptions: {
-      modifyVars: themeVariables, // make your antd custom effective
-      javascriptEnabled: true
-    },
-    cssLoaderOptions: {
-      localIdentName: '[local]___[hash:base64:5]',
-      getLocalIdent: (context, localIdentNames, localName, options) => {
-        let hz = context.resourcePath.replace(context.rootContext, '');
-        if (/node_modules/.test(hz)) {
-          return localName;
-        }
-        return cssLoaderGetLocalIdent(
-          context,
-          localIdentNames,
-          localName,
-          options
-        );
+module.exports = withPlugins([withStylus, withCss, withLess, withTM], {
+  cssModules: true,
+  camelCase: true,
+  transpileModules: ['antd', 'antd-mobile'],
+  lessLoaderOptions: {
+    modifyVars: themeVariables, // make your antd custom effective
+    javascriptEnabled: true
+  },
+  cssLoaderOptions: {
+    localIdentName: '[local]___[hash:base64:5]',
+    getLocalIdent: (context, localIdentNames, localName, options) => {
+      let hz = context.resourcePath.replace(context.rootContext, '');
+      if (/node_modules/.test(hz)) {
+        return localName;
       }
-    },
-    postcssLoaderOptions: {
-      // parser: 'sugarss',
-      config: {
-        ctx: {
-          theme: JSON.stringify(process.env.REACT_APP_THEME)
-        }
+      return cssLoaderGetLocalIdent(
+        context,
+        localIdentNames,
+        localName,
+        options
+      );
+    }
+  },
+  postcssLoaderOptions: {
+    // parser: 'sugarss',
+    config: {
+      ctx: {
+        theme: JSON.stringify(process.env.REACT_APP_THEME)
       }
     }
   },
-  nextConfig
-);
+  ...nextConfig
+});
