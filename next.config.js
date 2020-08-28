@@ -2,8 +2,11 @@ const withPlugins = require('next-compose-plugins');
 const withStylus = require('@zeit/next-stylus');
 const withCss = require('@zeit/next-css');
 const withLess = require('@zeit/next-less');
+const lessToJS = require('less-vars-to-js');
 const withTM = require('next-transpile-modules');
 const cssLoaderGetLocalIdent = require('css-loader/lib/getLocalIdent');
+const fs = require('fs');
+const path = require('path');
 
 const dev = process.env.NODE_ENV !== 'production';
 
@@ -13,11 +16,18 @@ if (typeof require !== 'undefined') {
   require.extensions['.css'] = file => {};
 }
 
+// Where your antd-custom.less file lives
+const themeVariables = lessToJS(
+  fs.readFileSync(
+    path.resolve(__dirname, './src/pages/antd-custom.less'),
+    'utf8'
+  )
+);
+
 const nextConfig = {
   distDir: 'dist',
   webpack: (config, { buildId, deve, isServer, defaultLoaders }) => {
     if (isServer) {
-      // 为true使用在服务端, 为false使用在客户端
       const antStyles = /antd\/.*?\/style.*?/;
       const origExternals = [...config.externals];
       config.externals = [
@@ -49,6 +59,7 @@ module.exports = withPlugins(
     camelCase: true,
     transpileModules: ['antd', 'antd-mobile'],
     lessLoaderOptions: {
+      modifyVars: themeVariables, // make your antd custom effective
       javascriptEnabled: true
     },
     cssLoaderOptions: {
