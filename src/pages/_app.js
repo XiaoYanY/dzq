@@ -9,13 +9,14 @@ import { SENTRY_DSN } from '../consts';
 import './rest.css';
 
 class MyApp extends App {
-  // static async getInitialProps({ Component, ctx }) {
-  //   return {
-  //     pageProps: Component.getInitialProps
-  //       ? await Component.getInitialProps(ctx)
-  //       : {}
-  //   };
-  // }
+  static async getInitialProps({ Component, ctx }) {
+    return {
+      pageProps: Component.getInitialProps
+        ? await Component.getInitialProps(ctx)
+        : {},
+      seoData: ctx?.query?.seo || {}
+    };
+  }
 
   componentDidMount() {
     try {
@@ -23,7 +24,6 @@ class MyApp extends App {
         dsn: SENTRY_DSN
       });
     } catch (error) {}
-    console.log('process.env', process.env);
   }
 
   componentDidCatch(error, errorInfo) {
@@ -39,11 +39,15 @@ class MyApp extends App {
   }
 
   render() {
-    const { Component, pageProps, store } = this.props;
+    const { Component, pageProps, store, seoData } = this.props;
+
     return (
       <>
         <Head>
-          <title>Nextjs-stylus</title>
+          <title>{seoData.title}</title>
+          <meta name="keywords" content={seoData.keywords} />
+          <meta name="description" content={seoData.description} />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
 
         <Provider store={store}>
