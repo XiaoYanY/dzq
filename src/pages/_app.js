@@ -44,9 +44,9 @@ class MyApp extends App {
     return (
       <>
         <Head>
-          <title>{seoData.title}</title>
-          <meta name="keywords" content={seoData.keywords} />
-          <meta name="description" content={seoData.description} />
+          <title>{seoData?.title || ''}</title>
+          <meta name="keywords" content={seoData?.keywords || ''} />
+          <meta name="description" content={seoData?.description || ''} />
           <link rel="icon" href="/favicon.ico" />
         </Head>
 

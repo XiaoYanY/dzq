@@ -18,6 +18,20 @@ const routeData = [
     description: ''
   },
   {
+    path: '/blog',
+    component: '/blog',
+    title: 'blog',
+    keywords: '',
+    description: ''
+  },
+  {
+    path: '/about',
+    component: '/about',
+    title: 'about',
+    keywords: '',
+    description: ''
+  },
+  {
     path: '/a',
     component: '/a',
     title: 'a标题',

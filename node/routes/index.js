@@ -39,8 +39,14 @@ module.exports = function(app) {
   });
 
   router.get('*', async ctx => {
-    await handle(ctx.req, ctx.res);
+    // await handle(ctx.req, ctx.res);
+    await koaRender({
+      app,
+      ctx,
+      component: '/_error'
+    });
     ctx.respond = false;
   });
+
   return router;
 };
