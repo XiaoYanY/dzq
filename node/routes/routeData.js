@@ -1,7 +1,7 @@
 const routeData = [
   {
     path: '/',
-    // redirect: '/', // 跳转到指定的path路由
+    // redirect: '/', // 替换当前url到指定path
     component: '/home', // 声明此组件，将不判断是否显示h5/pc组件
     // componentPc: '', // pc页面
     // componentH5: '', // h5页面

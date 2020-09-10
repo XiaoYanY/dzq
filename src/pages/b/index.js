@@ -67,9 +67,10 @@ const Home = props => {
   );
 };
 
-Home.getInitialProps = async ({ query }) => {
+Home.getInitialProps = async content => {
+  const { req } = content;
   return {
-    urlData: query.params // 路由:id参数
+    urlData: req.params // 路由:id参数
   };
 };
 

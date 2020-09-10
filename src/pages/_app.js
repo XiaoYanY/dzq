@@ -14,7 +14,7 @@ class MyApp extends App {
       pageProps: Component.getInitialProps
         ? await Component.getInitialProps(ctx)
         : {},
-      seoData: ctx?.query?.seo || {}
+      seoData: ctx.req?.seoData || {}
     };
   }
 
@@ -40,11 +40,10 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, store, seoData } = this.props;
-
     return (
       <>
         <Head>
-          <title>{seoData?.title || ''}</title>
+          <title>{seoData?.title || '开课吧'}</title>
           <meta name="keywords" content={seoData?.keywords || ''} />
           <meta name="description" content={seoData?.description || ''} />
           <link rel="icon" href="/favicon.ico" />
