@@ -1,5 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
+import { Button } from 'antd';
 import TestHome from './test';
 import styles from './styles.styl';
 
@@ -11,6 +12,9 @@ const Home = props => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TestHome />
+
+      <Button type="primary">Primary Button</Button>
+
       <div className="hero">
         <h1 className="title">Welcome to blog page! {props.demoName}</h1>
 
