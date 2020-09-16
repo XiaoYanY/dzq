@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
-    "@kkb/daji": "^1.1.15",
+    "@kkb/daji": "^1.1.24",
     "@rematch/core": "^1.2.0",
     "@rematch/loading": "^1.2.1",
     "@sentry/browser": "^5.7.1",

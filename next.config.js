@@ -49,7 +49,6 @@ const nextConfig = {
     config.module.rules.unshift({
       test: /\.(js|mjs)$/,
       exclude: /@babel(?:\/|\\{1,2})runtime/,
-      // includes: /@kkb/,
       loader: 'babel-loader',
       options: {
         presets: [
@@ -92,10 +91,10 @@ const nextConfig = {
   }
 };
 
-module.exports = withPlugins([withStylus, withCss, withLess, withTM], {
+module.exports = withPlugins([withCss, withStylus, withLess, withTM], {
   cssModules: true,
   camelCase: true,
-  transpileModules: ['antd', 'antd-mobile', '@kkb/daji'],
+  transpileModules: ['antd', 'antd-mobile'],
   lessLoaderOptions: {
     modifyVars: themeVariables, // make your antd custom effective
     javascriptEnabled: true
