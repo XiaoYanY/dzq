@@ -48,7 +48,8 @@ const nextConfig = {
 
     config.module.rules.unshift({
       test: /\.(js|mjs)$/,
-      exclude: /@babel(?:\/|\\{1,2})runtime/,
+      // exclude: /@babel(?:\/|\\{1,2})runtime/,\
+      include: [/node_modules\/@kkb\/daji/],
       loader: 'babel-loader',
       options: {
         presets: [

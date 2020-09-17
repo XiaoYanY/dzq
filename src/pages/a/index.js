@@ -9,7 +9,7 @@
 import React from 'react';
 import Head from 'next/head';
 import Router, { withRouter } from 'next/router';
-import { Foot, ButtonTest } from '@kkb/daji';
+import { ButtonTest } from '@kkb/daji';
 import styles from './styles.styl';
 
 const Home = res => {
@@ -20,7 +20,7 @@ const Home = res => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ButtonTest />
-      <Foot />
+
       <div className="hero">
         <h1 className="title">Welcome to b page!aaaa</h1>
 
