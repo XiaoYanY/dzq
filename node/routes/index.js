@@ -2,16 +2,32 @@ const Router = require('koa-router');
 const proxyMiddleware = require('http-proxy-middleware');
 const c2k = require('koa2-connect');
 const proxyTable = require('../config/proxy.js');
+const { isPc } = require('../utils');
+const { koaRender } = require('../utils/koaRender');
+const { routeData } = require('./routeData');
 
 const router = new Router();
-const utils = require('../utils');
 
 module.exports = function(app) {
   const handle = app.getRequestHandler();
-  console.log('starkwang chinese name', utils.stark);
 
-  router.get('/check', async ctx => {
-    await app.render(ctx.req, ctx.res, '/check', ctx.query);
+  routeData.forEach(item => {
+    router.get(item.path, async ctx => {
+      item.redirect && ctx.response.redirect(item.redirect);
+
+      let newComponent = item.component;
+      if (!newComponent) {
+        const pcFlag = isPc(ctx.req.headers['user-agent']);
+        newComponent = pcFlag ? item.componentPc : item.componentH5;
+      }
+      await koaRender({
+        app,
+        ctx,
+        component: newComponent,
+        data: item
+      });
+      ctx.respond = false;
+    });
   });
 
   Object.keys(proxyTable).forEach(context => {
@@ -21,19 +37,16 @@ module.exports = function(app) {
     }
     router.get('*', c2k(proxyMiddleware(options.filter || context, options)));
   });
-  router.get('/a/:id', async ctx => {
-    console.log('ctx.query', ctx);
-    await app.render(ctx.req, ctx.res, '/b', ctx.query);
-    // ctx.respond = false;
-  });
-  router.get('/b', async ctx => {
-    await app.render(ctx.req, ctx.res, '/a', ctx.query);
+
+  router.get('*', async ctx => {
+    // await handle(ctx.req, ctx.res);
+    await koaRender({
+      app,
+      ctx,
+      component: '/_error'
+    });
     ctx.respond = false;
   });
 
-  router.get('*', async ctx => {
-    await handle(ctx.req, ctx.res);
-    ctx.respond = false;
-  });
   return router;
 };

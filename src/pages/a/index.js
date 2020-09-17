@@ -1,16 +1,30 @@
+/*
+ * @Author: starkwang
+ * @Contact me: https://shudong.wang/about
+ * @Date: 2019-11-21 11:45:47
+ * @LastEditors: starkwang
+ * @LastEditTime: 2019-11-27 18:04:42
+ * @Description: file content
+ */
 import React from 'react';
-import { withRouter } from 'next/router';
+import Head from 'next/head';
+import Router, { withRouter } from 'next/router';
+import { ButtonTest } from '@kkb/daji';
 import styles from './styles.styl';
 
-const Home = props => {
-  const { urlData } = props;
-
+const Home = res => {
   return (
     <div>
-      <div className="hero">
-        <h1 className="title">Welcome to b page!bbb</h1>
+      <Head>
+        <title>aaaa</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <ButtonTest />
 
-        <div className={styles.stark}>路由id参数 {urlData?.id}</div>
+      <div className="hero">
+        <h1 className="title">Welcome to b page!aaaa</h1>
+
+        <div className={styles.stark}>This is blog page</div>
 
         <p className="description">
           To get started, edit <code>pages/index.js</code> and save to reload.
@@ -66,12 +80,4 @@ const Home = props => {
     </div>
   );
 };
-
-Home.getInitialProps = async content => {
-  const { req } = content;
-  return {
-    urlData: req.params // 路由:id参数
-  };
-};
-
 export default withRouter(Home);
