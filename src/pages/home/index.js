@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import Router, { withRouter } from 'next/router';
+import { withRouter } from 'next/router';
 import styles from './styles.styl';
 
 const Home = res => {

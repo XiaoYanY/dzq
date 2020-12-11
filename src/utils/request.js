@@ -23,119 +23,96 @@ axios.defaults.withCredentials = true;
 axios.defaults.timeout = 50000;
 axios.defaults.headers.common['Content-Type'] = 'application/json';
 axios.defaults.baseURL = config.baseURL;
+axios.defaults.isCustomHeaders = true; // 是否拦截器重置请求头
 
 // 中间件 拦截请求-
 axios.interceptors.response.use(
   response => {
+    if (config.isCustomHeaders) {
+      // config.headers.Authorization = 'token';
+    }
     return response;
   },
   err => {
     // console.log(err, '======error1')
-    if (!err.response) {
-      return;
-    }
+    if (!err.response) return;
+
     const res = err.response;
     if (codeMessage[res?.status]) {
-      // eslint-disable-next-line
       console.error(`${codeMessage[res?.status]}`);
     }
   }
 );
 
+axios.interceptors.response.use(
+  response => {
+    return response;
+  },
+  err => {
+    if (!err.response) return;
+    Promise.reject(err);
+  }
+);
+
+const safeRequest = (url, options) => {
+  return new Promise((resolve, reject) => {
+    axios({
+      method: 'GET',
+      ...options,
+      url
+    }).then(
+      res => {
+        if (res) {
+          resolve(res.data);
+        } else {
+          reject(res);
+        }
+      },
+      err => {
+        reject(err);
+      }
+    );
+  });
+};
+
 /**
  * get
  * @param url
- * @param data
+ * @param opts
  * @returns {Promise}
  */
-
-const get = (url, params = {}) => {
-  return new Promise((resolve, reject) => {
-    axios
-      .get(url, {
-        params
-      })
-      .then(response => {
-        if (response?.data) {
-          resolve(response.data);
-        } else {
-          resolve({ data: [] });
-        }
-      })
-      .catch(error => {
-        reject(error);
-      });
-  });
+const get = (url, opts = {}) => {
+  return safeRequest(url, opts);
 };
 
 /**
  * post
  * @param url
- * @param data
+ * @param opts
  * @returns {Promise}
  */
-const post = (url, data = {}) => {
-  return new Promise((resolve, reject) => {
-    axios.post(url, data).then(
-      response => {
-        resolve(response.data);
-      },
-      error => {
-        reject(error);
-      }
-    );
+const post = (url, opts = {}) => {
+  return safeRequest(url, {
+    ...opts,
+    method: 'POST'
   });
 };
 
 /**
  * put
  * @param url
- * @param data
+ * @param opts
  * @returns {Promise}
  */
-const put = (url, data = {}) => {
-  return new Promise((resolve, reject) => {
-    axios.put(url, data).then(
-      response => {
-        if (response?.data) {
-          resolve(response.data);
-        } else {
-          reject(response.error);
-        }
-      },
-      err => {
-        reject(err);
-      }
-    );
-  });
-};
-
-/**
- * put
- * @param url
- * @param data
- * @returns {Promise}
- */
-const del = (url, data = {}) => {
-  return new Promise((resolve, reject) => {
-    axios.delete(url, data).then(
-      response => {
-        if (response?.data) {
-          resolve(response.data);
-        } else {
-          reject(response.error);
-        }
-      },
-      err => {
-        reject(err);
-      }
-    );
+const put = (url, opts = {}) => {
+  return safeRequest(url, {
+    ...opts,
+    method: 'PUT'
   });
 };
 
 export default {
   get,
   post,
-  put,
-  del
+  put
 };

@@ -1,14 +1,13 @@
-'use strict';
-
 module.exports = {
   env: {
     browser: true,
     node: true,
     es6: true
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'react-hooks', 'prettier', 'react-redux'],
   globals: {
-    location: true
+    location: true,
+    React: 'writable'
   },
   overrides: [
     {
@@ -28,50 +27,102 @@ module.exports = {
       modules: true
     }
   },
-  extends: ['airbnb-base', 'prettier', 'prettier/react'],
-  globals: {
-    React: 'writable'
-  },
+  extends: [
+    'airbnb-base',
+    'prettier',
+    'prettier/react',
+    'plugin:react-redux/recommended',
+    'plugin:prettier/recommended'
+  ],
   rules: {
-    'no-underscore-dangle': 1,
-    'prefer-destructuring': 1,
-    'arrow-body-style': 0,
-    'import/no-extraneous-dependencies': 0,
-    'import/extensions': 0,
-    'prefer-const': 0,
-    'no-unused-expressions': [
-      1,
-      {
-        allowShortCircuit: true
-      }
-    ],
-    'no-empty': [
+    // 除了warn和error允许使用，其它console使用警告提示
+    'no-console': [1, { allow: ['warn', 'error'] }],
+    'no-use-before-define': 'off',
+    'react/jsx-wrap-multilines': 0,
+    'react/prop-types': 0,
+    'react/forbid-prop-types': 0,
+    'react/sort-comp': 1,
+    'react/jsx-one-expression-per-line': 0,
+    'generator-star-spacing': 0,
+    'function-paren-newline': 0,
+    'import/no-unresolved': [
       2,
       {
-        allowEmptyCatch: true
+        ignore: ['^@/', '^@@/', '^@alipay/bigfish/'],
+        caseSensitive: true,
+        commonjs: true
       }
     ],
-    'default-case': 0,
-    'no-case-declarations': 0,
-    'class-methods-use-this': 0,
-    'no-script-url': 0,
-    semi: 0,
-    'eol-last': 0,
-    'no-unused-vars': 1,
-    'global-require': 0,
-    'react/jsx-uses-react': 2,
-    'react/jsx-uses-vars': 2,
-    'import/no-unresolved': 0,
-    'no-unneeded-ternary': 1,
-    'no-nested-ternary': 1,
-    'max-len': [2, 150],
-    'no-return-assign': 0,
-    'dot-notation': 1,
-    'func-names': 1,
-    'no-useless-constructor': 0,
-    'no-plusplus': 0,
-    'no-param-reassign': 0, // Disallow Reassignment of Function Parameters
-    'no-multi-assign': 0, // Disallow Use of Chained Assignment Expressions
-    'consistent-return': 0 // require return statements to either always or never specify values
+    'import/order': 'warn',
+    'react/jsx-props-no-spreading': 0,
+    'react/state-in-constructor': 0,
+    'react/static-property-placement': 0,
+    'import/no-extraneous-dependencies': [
+      2,
+      {
+        optionalDependencies: true,
+        devDependencies: [
+          '**/tests/**.{ts,js,jsx,tsx}',
+          '**/_test_/**.{ts,js,jsx,tsx}',
+          '/mock/**/**.{ts,js,jsx,tsx}',
+          '**/**.test.{ts,js,jsx,tsx}',
+          '**/_mock.{ts,js,jsx,tsx}',
+          '**/example/**.{ts,js,jsx,tsx}',
+          '**/examples/**.{ts,js,jsx,tsx}'
+        ]
+      }
+    ],
+    'jsx-a11y/no-noninteractive-element-interactions': 0,
+    'jsx-a11y/click-events-have-key-events': 0,
+    'jsx-a11y/no-static-element-interactions': 0,
+    'jsx-a11y/anchor-is-valid': 0,
+    'linebreak-style': 0,
+    // Too restrictive, writing ugly code to defend against a very unlikely scenario: https://eslint.org/docs/rules/no-prototype-builtins
+    'no-prototype-builtins': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-default-export': [0, 'camel-case'],
+    // Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
+    'react/destructuring-assignment': 'off',
+    'react/jsx-filename-extension': 'off',
+    'sort-imports': 0,
+    // Makes no sense to allow type inferrence for expression parameters, but require typing the response
+    // '@typescript-eslint/no-use-before-define': [
+    //   'error',
+    //   { functions: false, classes: false, variables: true, typedefs: true }
+    // ],
+    '@typescript-eslint/explicit-function-return-type': [
+      'off',
+      { allowTypedFunctionExpressions: true }
+    ],
+    '@typescript-eslint/camelcase': 0,
+    '@typescript-eslint/no-var-requires': 0,
+    // Common abbreviations are known and readable
+    'unicorn/prevent-abbreviations': 'off',
+    '@typescript-eslint/explicit-member-accessibility': 0,
+    '@typescript-eslint/interface-name-prefix': 0,
+    '@typescript-eslint/no-non-null-assertion': 0,
+    '@typescript-eslint/naming-convention': 0,
+    'import/no-cycle': 0,
+    'react/no-array-index-key': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react/require-default-props': 0,
+    'react/jsx-fragments': 0,
+    // Conflict with prettier
+    'arrow-body-style': 0,
+    'arrow-parens': 0,
+    'object-curly-newline': 0,
+    'implicit-arrow-linebreak': 0,
+    'operator-linebreak': 0,
+    'eslint-comments/no-unlimited-disable': 0,
+    'no-param-reassign': 2,
+    'space-before-function-paren': 0,
+    'import/extensions': 0
+  },
+  settings: {
+    // support import modules from TypeScript files in JavaScript files
+    'import/resolver': {
+      node: { extensions: ['.js', '.jsx', '.ts', '.tsx', '.d.ts'] }
+    },
+    polyfills: ['fetch', 'Promise', 'URL', 'object-assign']
   }
 };
