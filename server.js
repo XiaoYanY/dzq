@@ -12,6 +12,7 @@ const next = require('next');
 // const proxyMiddleware = require('http-proxy-middleware');
 // const c2k = require('koa2-connect');
 const Sentry = require('@sentry/node');
+const static = require('koa-static');
 const dev = process.env.NODE_ENV === 'development';
 const app = next({ dev });
 
@@ -19,10 +20,14 @@ const router = require('./node/routes')(app);
 const server = new Koa();
 // const handler = routes.getRequestHandler(app);
 // process.exit(1)
-const port = 6020;
+const port = process.env.PORT || 6020;
 Sentry.init({
   dsn: ''
 });
+
+// 配置静态资源
+const staticPath = '/public';
+server.use(static(path.join(__dirname, staticPath)));
 
 app.prepare().then(() => {
   server.use(async (ctx, nxt) => {
