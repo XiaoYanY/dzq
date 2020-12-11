@@ -4,7 +4,7 @@ module.exports = {
     node: true,
     es6: true
   },
-  plugins: ['react', 'react-hooks', 'prettier', 'react-redux'],
+  plugins: ['react', 'react-hooks', 'prettier', '@typescript-eslint'],
   globals: {
     location: true,
     React: 'writable'
@@ -18,7 +18,7 @@ module.exports = {
       }
     }
   ],
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 7,
     sourceType: 'module',
@@ -31,7 +31,6 @@ module.exports = {
     'airbnb-base',
     'prettier',
     'prettier/react',
-    'plugin:react-redux/recommended',
     'plugin:prettier/recommended'
   ],
   rules: {
