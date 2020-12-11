@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { withRouter } from 'next/router';
 import styles from './styles.styl';
 
-const Home = res => {
+const Home = () => {
   return (
     <div>
       <Head>

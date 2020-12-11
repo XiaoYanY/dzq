@@ -115,7 +115,8 @@ module.exports = {
     'eslint-comments/no-unlimited-disable': 0,
     'no-param-reassign': 2,
     'space-before-function-paren': 0,
-    'import/extensions': 0
+    'import/extensions': 0,
+    'class-methods-use-this': 0
   },
   settings: {
     // support import modules from TypeScript files in JavaScript files
