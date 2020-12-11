@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development INIT_ENV=dev node server",
+    "dev": "cross-env PORT=8000 NODE_ENV=development INIT_ENV=dev node server",
     "build:test": "cross-env NODE_ENV=production INIT_ENV=test next build",
     "build:pre": "cross-env NODE_ENV=production INIT_ENV=prod next build",
     "build:prod": "cross-env NODE_ENV=production INIT_ENV=prod next build",
-    "tag": "git tag v0.2.0 && git push origin --tags"
+    "s": "cross-env PORT=80 NODE_ENV=production node server"
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
@@ -40,7 +40,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",
-    "stylus": "^0.54.7"
+    "stylus": "^0.54.7",
+    "typescript": "^4.1.2"
   },
   "husky": {
     "hooks": {
