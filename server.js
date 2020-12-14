@@ -8,18 +8,15 @@
  */
 const Koa = require('koa');
 const next = require('next');
-
-// const proxyMiddleware = require('http-proxy-middleware');
-// const c2k = require('koa2-connect');
 const Sentry = require('@sentry/node');
 const static = require('koa-static');
+const path = require('path');
 const dev = process.env.NODE_ENV === 'development';
 const app = next({ dev });
 
 const router = require('./node/routes')(app);
 const server = new Koa();
 // const handler = routes.getRequestHandler(app);
-// process.exit(1)
 const port = process.env.PORT || 6020;
 Sentry.init({
   dsn: ''

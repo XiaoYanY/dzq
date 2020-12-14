@@ -1,6 +1,6 @@
 console.log('process.env.INIT_ENV: ', process.env.INIT_ENV);
 export const currentEnv = process.env.INIT_ENV;
-const isProd = process.env.INIT_ENV === 'prod';
+export const isProd = process.env.INIT_ENV === 'prod';
 
 const defualtUrl = 'https://api.shudong.wang';
 
