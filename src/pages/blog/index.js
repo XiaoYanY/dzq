@@ -75,15 +75,4 @@ const Home = props => {
   );
 };
 
-// 函数hook组件使用方式，在组件上挂载此方法
-Home.getInitialProps = async ({ store }) => {
-  const getHomeFn = store.dispatch.home; // 获取redux中home挂载的方法
-  const getHomeState = store.getState().home; // 获取redux中home的state值
-
-  return {
-    demoName: getHomeState.demoName,
-    ...getHomeFn
-  };
-};
-
 export default Home;

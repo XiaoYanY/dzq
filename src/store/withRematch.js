@@ -1,5 +1,5 @@
+/* eslint-disable */
 import React from 'react';
-
 import { checkServer } from '../utils';
 import initializeStore from './index';
 
@@ -18,7 +18,7 @@ function getOrCreateStore(initialState) {
   return window[__NEXT_REDUX_STORE__];
 }
 
-export default App => {
+const HocApp = App => {
   return class AppWithRematch extends React.Component {
     static async getInitialProps(appContext) {
       // Get or Create the store with `undefined` as initialState
@@ -49,3 +49,5 @@ export default App => {
     }
   };
 };
+
+export default HocApp;

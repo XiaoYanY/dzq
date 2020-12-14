@@ -1,6 +1,6 @@
 {
   "name": "with-next-stylus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "cross-env PORT=8000 NODE_ENV=development INIT_ENV=dev node server",
@@ -31,7 +31,7 @@
     "koa-static": "^5.0.0",
     "koa2-connect": "^1.0.2",
     "less": "^3.12.2",
-    "next": "^10.0.3",
+    "next": "10.0.3",
     "next-compose-plugins": "^2.2.1",
     "next-transpile-modules": "^6.0.0",
     "postcss-flexbugs-fixes": "^4.2.1",

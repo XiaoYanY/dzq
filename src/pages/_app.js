@@ -19,11 +19,9 @@ class MyApp extends App {
   }
 
   componentDidMount() {
-    try {
-      Sentry.init({
-        dsn: SENTRY_DSN
-      });
-    } catch (error) {}
+    Sentry?.init?.({
+      dsn: SENTRY_DSN
+    });
   }
 
   componentDidCatch(error, errorInfo) {

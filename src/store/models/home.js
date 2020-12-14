@@ -1,6 +1,4 @@
-import services from '../loadServices';
-
-const { commonService } = services;
+import { getHomeData } from '../../services/commonService';
 
 export default {
   state: {
@@ -17,7 +15,7 @@ export default {
   },
   effects: {
     async getUser(payload, state) {
-      const res = await commonService.getHomeData();
+      const res = await getHomeData();
       this.updateState({ user: res.data });
     }
   }
