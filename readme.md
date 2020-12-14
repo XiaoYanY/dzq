@@ -1,4 +1,1 @@
-# author
-
-> stark blog:
-> https://shudong.wang
+## 开课吧 ssr 脚手架
