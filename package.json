@@ -7,7 +7,8 @@
     "build:test": "cross-env NODE_ENV=production INIT_ENV=test next build",
     "build:pre": "cross-env NODE_ENV=production INIT_ENV=prod next build",
     "build:prod": "cross-env NODE_ENV=production INIT_ENV=prod next build",
-    "s": "cross-env PORT=80 NODE_ENV=production node server"
+    "s": "cross-env PORT=80 NODE_ENV=production node server",
+    "tags": "git tag v0.1.1 && git push origin --tags"
   },
   "dependencies": {
     "@babel/polyfill": "^7.11.5",
