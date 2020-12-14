@@ -1,6 +1,6 @@
 {
   "name": "with-next-stylus",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "scripts": {
     "dev": "cross-env PORT=8000 NODE_ENV=development INIT_ENV=dev node server",

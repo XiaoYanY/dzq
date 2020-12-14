@@ -4,7 +4,6 @@ import { Layout } from '../components';
 
 class MallDocument extends Document {
   render() {
-    // console.warn(this);
     return (
       <Html>
         <Head>

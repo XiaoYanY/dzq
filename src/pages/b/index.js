@@ -67,10 +67,12 @@ const Home = props => {
   );
 };
 
-Home.getInitialProps = async content => {
+export const getServerSideProps = async content => {
   const { req } = content;
   return {
-    urlData: req.params // 路由:id参数
+    props: {
+      urlData: req?.params // 路由:id参数
+    }
   };
 };
 

@@ -38,11 +38,6 @@ const Home = ({ user }) => (
   </div>
 );
 
-Home.getInitialProps = async ({ store }) => {
-  await store.dispatch.home.getUser();
-  return {};
-};
-
 const mapState = ({ home }) => {
   return { ...home };
 };

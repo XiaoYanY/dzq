@@ -1,16 +1,15 @@
-/*eslint-disable*/
+/* eslint-disable */
 export const checkServer = () => {
   return typeof window === 'undefined';
 };
 
 // 判断是否是移动端
 export const isMobile = () => {
-  let ua = navigator.userAgent.toLowerCase();
-  let is_mobile =
+  const ua = navigator.userAgent.toLowerCase();
+  const is_mobile =
     ua.match(
       /(ipod|iphone|android|coolpad|mmp|smartphone|midp|wap|xoom|symbian|j2me|blackberry|wince)/i
     ) != null;
-  let is_kkbApp = ua.indexOf('kkbmobile') !== -1;
   if (is_mobile) {
     return true;
   }
@@ -56,7 +55,7 @@ export const customFormatDate = (UnixTime, fmt) => {
       `${dateTime.getFullYear()}`.substr(4 - RegExp.$1.length)
     );
   }
-  for (let k in o) {
+  for (const k in o) {
     if (new RegExp(`(${k})`).test(newDataStrin)) {
       newDataStrin = newDataStrin.replace(
         RegExp.$1,
@@ -97,17 +96,17 @@ export function removeStorage(key) {
 export const getUrlToJson = url => {
   try {
     const strUrl = url || window?.location?.href || '';
-    var temp1 = strUrl.split('?');
-    var pram = temp1[1];
+    const temp1 = strUrl.split('?');
+    const pram = temp1[1];
     if (pram === 'undefined' || !pram) {
       return {};
     }
-    var keyValue = pram.split('&');
-    var obj = {};
-    for (var i = 0; i < keyValue.length; i++) {
-      var item = keyValue[i].split('=');
-      var key = item[0];
-      var value = item[1];
+    const keyValue = pram.split('&');
+    const obj = {};
+    for (let i = 0; i < keyValue.length; i++) {
+      const item = keyValue[i].split('=');
+      const key = item[0];
+      const value = item[1];
       obj[key] = value;
     }
     return obj;
@@ -117,24 +116,24 @@ export const getUrlToJson = url => {
 };
 
 export const delUrlParams = (url, name) => {
-  //根据#号拆分
-  let poundArr = url.split('#');
-  //？拆分
+  // 根据#号拆分
+  const poundArr = url.split('#');
+  // ？拆分
   let questionArr = [];
   if (poundArr) {
-    //把#接上
+    // 把#接上
     poundArr.forEach((element, index) => {
       if (index > 0) {
-        element = '#' + element;
+        element = `#${element}`;
       }
-      let tempArr = element.split('?');
+      const tempArr = element.split('?');
       if (!tempArr) {
         return true;
       }
       tempArr.forEach((item, idx) => {
-        //保留问号
+        // 保留问号
         if (idx > 0) {
-          item = '?' + item;
+          item = `?${item}`;
         }
         questionArr.push(item);
       });
@@ -144,7 +143,7 @@ export const delUrlParams = (url, name) => {
     if (questionArr) {
       questionArr.forEach((item, idx) => {
         if (idx > 0) {
-          item = '?' + item;
+          item = `?${item}`;
         }
       });
     }
@@ -154,19 +153,19 @@ export const delUrlParams = (url, name) => {
     return url;
   }
 
-  //&符号的处理
-  let andArr = [];
+  // &符号的处理
+  const andArr = [];
   questionArr.forEach((item, index) => {
-    let andIdx = item.indexOf('&');
+    const andIdx = item.indexOf('&');
     if (andIdx <= -1) {
       andArr.push(item);
       return true;
     }
 
-    let tempAndArr = item.split('&');
+    const tempAndArr = item.split('&');
     tempAndArr.forEach((ele, idx) => {
       if (idx > 0) {
-        ele = '&' + ele;
+        ele = `&${ele}`;
       }
       andArr.push(ele);
     });
@@ -174,11 +173,11 @@ export const delUrlParams = (url, name) => {
 
   let newUrl = '';
   andArr.forEach(item => {
-    let nameIndex = item.indexOf(name + '=');
-    //不拼接要删除的参数
+    const nameIndex = item.indexOf(`${name}=`);
+    // 不拼接要删除的参数
     if (nameIndex > -1) {
-      //保留第一个问号
-      let questionIdx = item.indexOf('?');
+      // 保留第一个问号
+      const questionIdx = item.indexOf('?');
       if (questionIdx == 0) {
         newUrl += '?';
       }
