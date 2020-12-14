@@ -1,5 +1,5 @@
 // koa路由渲染
-const koaRender = async ({ app, ctx, component, data }) => {
+const koaRender = ({ app, ctx, component, data }) => {
   const seoData = data || {};
   ctx.req.seoData = seoData;
   ctx.req.params = ctx.params;

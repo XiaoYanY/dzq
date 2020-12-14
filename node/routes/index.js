@@ -1,5 +1,5 @@
-const Router = require('koa-router');
-const proxyMiddleware = require('http-proxy-middleware');
+const Router = require('@koa/router');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 const c2k = require('koa2-connect');
 const proxyTable = require('../config/proxy.js');
 const { isPc } = require('../utils');
@@ -8,11 +8,11 @@ const { routeData } = require('./routeData');
 
 const router = new Router();
 
-module.exports = function(app) {
+module.exports = function (app) {
   const handle = app.getRequestHandler();
 
   routeData.forEach(item => {
-    router.get(item.path, async ctx => {
+    router.get(item.path, ctx => {
       item.redirect && ctx.response.redirect(item.redirect);
 
       let newComponent = item.component;
@@ -20,7 +20,7 @@ module.exports = function(app) {
         const pcFlag = isPc(ctx.req.headers['user-agent']);
         newComponent = pcFlag ? item.componentPc : item.componentH5;
       }
-      await koaRender({
+      koaRender({
         app,
         ctx,
         component: newComponent,
@@ -35,12 +35,14 @@ module.exports = function(app) {
     if (typeof options === 'string') {
       options = { target: options };
     }
-    router.get('*', c2k(proxyMiddleware(options.filter || context, options)));
+    router.get(
+      '(.*)',
+      c2k(createProxyMiddleware(options.filter || context, options))
+    );
   });
 
-  router.get('*', async ctx => {
-    // await handle(ctx.req, ctx.res);
-    await koaRender({
+  router.get('(.*)', ctx => {
+    koaRender({
       app,
       ctx,
       component: '/_error'

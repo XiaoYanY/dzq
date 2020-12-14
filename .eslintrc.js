@@ -34,6 +34,7 @@ module.exports = {
     'plugin:prettier/recommended'
   ],
   rules: {
+    'no-unused-vars': 1,
     // 除了warn和error允许使用，其它console使用警告提示
     'no-console': [1, { allow: ['warn', 'error'] }],
     'no-use-before-define': 'off',
