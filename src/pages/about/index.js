@@ -111,8 +111,7 @@ const About = ({ list }) => (
 );
 
 About.getInitialProps = async ({ store }) => {
-  // await store?.dispatch?.demo?.query();
-  console.log('store.dispatch', store?.dispatch.demo.query);
+  await store?.dispatch?.demo?.query();
   return {};
 };
 

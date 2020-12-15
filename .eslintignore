@@ -6,3 +6,5 @@
 **/flow-typed/**
 src/serviceWorker.js
 node/
+build/
+next.config.js
