@@ -15,7 +15,7 @@ export default {
   effects: {
     async query(payload, state) {
       const res = await getHomeData().catch(e => e);
-      this.updateState({ list: res.data });
+      this.updateState({ list: [{ title: 'h111' }, { title: 'h222' }] });
     }
   }
 };

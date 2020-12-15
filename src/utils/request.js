@@ -17,7 +17,6 @@ axios.interceptors.response.use(
     return response;
   },
   err => {
-    // console.log(err, '======error1')
     if (!err.response) return;
 
     const res = err.response;

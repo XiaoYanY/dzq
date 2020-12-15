@@ -103,7 +103,7 @@ module.exports = withPlugins([withCss, withStylus, withLess, withTM], {
   cssLoaderOptions: {
     localIdentName: '[local]___[hash:base64:5]',
     getLocalIdent: (context, localIdentNames, localName, options) => {
-      let hz = context.resourcePath.replace(context.rootContext, '');
+      const hz = context.resourcePath.replace(context.rootContext, '');
       if (/node_modules\/@kkb\/daji/.test(hz)) {
         return cssLoaderGetLocalIdent(
           context,
@@ -131,6 +131,10 @@ module.exports = withPlugins([withCss, withStylus, withLess, withTM], {
         theme: JSON.stringify(process.env.REACT_APP_THEME)
       }
     }
+  },
+  // next内置images组件，hostname配置
+  images: {
+    domains: ['img.kaikeba.com']
   },
   ...nextConfig
 });
