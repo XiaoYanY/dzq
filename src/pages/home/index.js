@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
 import { withRouter } from 'next/router';
-import Image from 'next/image';
 import styles from './styles.styl';
 
 const Home = () => {
@@ -12,13 +11,6 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.hero}>
-        <Image
-          src="https://img.kaikeba.com/platform/107140210202txgb.png"
-          // layout="fill"
-          alt="Picture of the author"
-          width={200}
-          height={200}
-        />
         <h1 className="title">Welcome to b page! go home</h1>
 
         <div className={styles.stark}>This is blog page</div>
