@@ -7,5 +7,5 @@ module.exports = {
   jsxBracketSameLine: false,
   arrowParens: 'avoid',
   requirePragma: false,
-  proseWrap: 'preserve'
+  proseWrap: 'preserve',
 };

@@ -7,7 +7,6 @@ class MallDocument extends Document {
     return (
       <Html>
         <Head>
-          {/* <link rel="stylesheet" type="text/css" href={BOOTSTRAP}></link> */}
           <link
             rel="shortcut icon"
             href="https://img.kaikeba.com/kkb_portal_icon.ico"

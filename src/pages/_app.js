@@ -44,7 +44,7 @@ class MyApp extends App {
           <title>{seoData?.title || '开课吧'}</title>
           <meta name="keywords" content={seoData?.keywords || ''} />
           <meta name="description" content={seoData?.description || ''} />
-          <link rel="icon" href="/favicon.ico" />
+          <link rel="icon" href="/titleLogo.ico" />
         </Head>
 
         <Provider store={store}>

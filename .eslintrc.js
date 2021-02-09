@@ -34,9 +34,11 @@ module.exports = {
     'plugin:prettier/recommended'
   ],
   rules: {
+    'no-unresolved': 0,
     'no-unused-vars': 1,
+    'no-console': 0,
     // 除了warn和error允许使用，其它console使用警告提示
-    'no-console': [1, { allow: ['warn', 'error'] }],
+    // 'no-console': [1, { allow: ['warn', 'error'] }],
     'no-use-before-define': 'off',
     'react/jsx-wrap-multilines': 0,
     'react/prop-types': 0,
