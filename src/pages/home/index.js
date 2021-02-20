@@ -5,6 +5,7 @@ import classnames from 'classnames';
 import css from './styles.styl';
 import css1 from '../styles.styl';
 import Header from '../../components/Header';
+import TabPage from './components/tabPage';
 
 const cx = classnames.bind({ ...css, ...css1 });
 
@@ -15,7 +16,9 @@ const Home = () => {
         <title>博客主页</title>
       </Head>
       <Header />
-      <div className={cx('containerWrap')}></div>
+      <div className={cx('containerWrap')}>
+        <TabPage />
+      </div>
     </div>
   );
 };
