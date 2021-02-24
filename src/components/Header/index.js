@@ -36,14 +36,6 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {/* <style jsx>{`
-        .search.ant-input-group-wrapper {
-          width: 300px;
-        }
-        .search .ant-btn.ant-input-search-button {
-          border-left: none;
-        }
-      `}</style> */}
     </React.Fragment>
   );
 };
